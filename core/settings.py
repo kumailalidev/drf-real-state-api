@@ -87,19 +87,27 @@ DATABASES = {
     "default": {},
     # database for user management
     "users": {
-        "ENGINE": os.environ.get("ENGINE"),
+        "ENGINE": os.environ.get("DB_ENGINE"),
         "NAME": os.environ.get("USERS_DB_NAME"),
-        "USER": os.environ.get("USER"),
-        "PASSWORD": os.environ.get("PASSWORD"),
+        "USER": os.environ.get("PGSQL_USER"),
+        "PASSWORD": os.environ.get("PGSQL_PASSWORD"),
+        "HOST": "localhost",
+        "PORT": 5432,
     },
     # database for listings
     "listings": {
-        "ENGINE": os.environ.get("ENGINE"),
+        "DB_ENGINE": os.environ.get("ENGINE"),
         "NAME": os.environ.get("LISTINGS_DB_NAME"),
-        "USER": os.environ.get("USER"),
-        "PASSWORD": os.environ.get("PASSWORD"),
+        "USER": os.environ.get("PGSQL_USER"),
+        "PASSWORD": os.environ.get("PGSQL_PASSWORD"),
+        "HOST": "localhost",
+        "PORT": 5432,
     },
 }
+
+DATABASE_ROUTERS = [
+    "user.router.AuthRouter",
+]
 
 
 # Password validation
@@ -161,3 +169,5 @@ SIMPLE_JWT = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "user.UserAccount"
